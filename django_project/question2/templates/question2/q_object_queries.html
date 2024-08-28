@@ -1,0 +1,96 @@
+<!-- question2/templates/question2/q_object_queries.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q Object Queries</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Q Object Queries Results</h1>
+
+    <h2>Q Objects: Definition, Advantages, and Disadvantages</h2>
+    <table>
+        <tr>
+            <th>Aspect</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Definition</td>
+            <td>Q objects are used to encapsulate a collection of keyword arguments. They allow for complex queries with multiple conditions, logical operators like AND, OR, and NOT, and can be used to combine multiple queries in Django ORM.</td>
+        </tr>
+        <tr>
+            <td>Advantages</td>
+            <td>
+                <ul>
+                    <li>Flexibility in combining multiple conditions using logical operators.</li>
+                    <li>Ability to handle complex queries with mixed AND, OR, and NOT logic.</li>
+                    <li>Improves readability for complex query logic.</li>
+                    <li>Can be reused and combined to build dynamic query filters.</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Disadvantages</td>
+            <td>
+                <ul>
+                    <li>Can lead to more complex code, which may be harder to debug.</li>
+                    <li>Performance may be impacted for very complex queries with many Q objects.</li>
+                    <li>Not as intuitive for simple queries compared to using basic filter() methods.</li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+
+    <h2>OR Query: Orders with users whose username contains "John" or email ends with "example.com"</h2>
+    <ul>
+        {% for order in orders_or_query %}
+            <li>Order Number: {{ order.order_number }} - Username: {{ order.user.username }} - Email: {{ order.user.email }} - Total Price: ${{ order.total_price }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>AND Query: Orders with users whose username contains "John" and total price greater than $500</h2>
+    <ul>
+        {% for order in orders_and_query %}
+            <li>Order Number: {{ order.order_number }} - Username: {{ order.user.username }} - Email: {{ order.user.email }} - Total Price: ${{ order.total_price }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>NOT Query: Orders with total price less than $100, excluding those with users whose username contains "John"</h2>
+    <ul>
+        {% for order in orders_not_query %}
+            <li>Order Number: {{ order.order_number }} - Username: {{ order.user.username }} - Email: {{ order.user.email }} - Total Price: ${{ order.total_price }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Combined Query: Orders with users whose username contains "John" or "Jane" and email ends with "example.com"</h2>
+    <ul>
+        {% for order in orders_combined_query %}
+            <li>Order Number: {{ order.order_number }} - Username: {{ order.user.username }} - Email: {{ order.user.email }} - Total Price: ${{ order.total_price }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Nested Query: Orders with total price greater than $500 or username does not contain "John" and email ends with "example.com"</h2>
+    <ul>
+        {% for order in orders_nested_query %}
+            <li>Order Number: {{ order.order_number }} - Username: {{ order.user.username }} - Email: {{ order.user.email }} - Total Price: ${{ order.total_price }}</li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
