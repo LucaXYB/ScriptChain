@@ -1,0 +1,106 @@
+<!-- question1/templates/question1/compare_methods.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparison of select_related and prefetch_related</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Comparison of select_related and prefetch_related</h1>
+
+    <!-- Comparison Table -->
+    <h2>Performance Comparison</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Criteria</th>
+                <th>select_related</th>
+                <th>prefetch_related</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Query Count</td>
+                <td>{{ select_query_count }}</td>
+                <td>{{ prefetch_query_count }}</td>
+            </tr>
+            <tr>
+                <td>Execution Time (seconds)</td>
+                <td>{{ select_elapsed_time }}</td>
+                <td>{{ prefetch_elapsed_time }}</td>
+            </tr>
+            <tr>
+                <td>Memory Usage (MB)</td>
+                <td>{{ select_memory_usage }}</td>
+                <td>{{ prefetch_memory_usage }}</td>
+            </tr>
+            <tr>
+                <td>Estimated Database Load</td>
+                <td>{{ select_database_load }}</td>
+                <td>{{ prefetch_database_load }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Original content -->
+    <h2>Method Overview</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Criteria</th>
+                <th>select_related</th>
+                <th>prefetch_related</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Query Type</td>
+                <td>Single SQL JOIN query</td>
+                <td>Multiple independent queries</td>
+            </tr>
+            <tr>
+                <td>Best Use Case</td>
+                <td>One-to-One or Many-to-One relationships</td>
+                <td>One-to-Many or Many-to-Many relationships</td>
+            </tr>
+            <tr>
+                <td>Flexibility</td>
+                <td>Less flexible with complex relationships</td>
+                <td>More flexible with complex relationships</td>
+            </tr>
+            <tr>
+                <td>Maintainability</td>
+                <td>Can be harder to maintain with complex JOINs</td>
+                <td>Easier to maintain due to independent queries</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>
+        <strong>Example Scenarios:</strong><br>
+        - Use <code>select_related</code> when you have a foreign key relationship and you want to fetch related objects in a single query.<br>
+        - Use <code>prefetch_related</code> when you need to fetch multiple related objects efficiently and avoid complex SQL joins.
+    </p>
+
+    <p>
+        <strong>Testing the Methods:</strong><br>
+        - <a href="{% url 'orders_with_users' %}">View Orders with Users (select_related)</a><br>
+        - <a href="{% url 'users_with_orders' %}">View Users with Orders (prefetch_related)</a>
+    </p>
+</body>
+</html>

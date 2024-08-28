@@ -1,0 +1,27 @@
+<!-- question1/templates/question1/user_list.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List with prefetch_related</title>
+</head>
+<body>
+    <h1>Users and Their Orders (using prefetch_related)</h1>
+    <p>Query Count: {{ query_count }}</p> <!-- Display query count -->
+    <p>Query Execution Time: {{ elapsed_time }} seconds</p> <!-- Display execution time -->
+    <p>Memory Usage: {{ memory_usage }} MB</p> <!-- Display memory usage -->
+    <p>Estimated Database Load: {{ database_load }}</p> <!-- Display database load -->
+    <ul>
+    {% for user in users %}
+        <li>User: {{ user.username }} ({{ user.email }})</li>
+        <ul>
+        {% for order in user.order_set.all %}
+            <li>Order: {{ order.order_number }} - Created at: {{ order.created_at }}</li>
+        {% endfor %}
+        </ul>
+    {% endfor %}
+    </ul>
+</body>
+</html>

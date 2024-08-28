@@ -1,0 +1,22 @@
+<!-- question1/templates/question1/order_list.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order List with select_related</title>
+</head>
+<body>
+    <h1>Orders and Their Users (using select_related)</h1>
+    <p>Query Count: {{ query_count }}</p> <!-- Display query count -->
+    <p>Query Execution Time: {{ elapsed_time }} seconds</p> <!-- Display execution time -->
+    <p>Memory Usage: {{ memory_usage }} MB</p> <!-- Display memory usage -->
+    <p>Estimated Database Load: {{ database_load }}</p> <!-- Display database load -->
+    <ul>
+    {% for order in orders %}
+        <li>Order: {{ order.order_number }} by {{ order.user.username }} ({{ order.user.email }})</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
